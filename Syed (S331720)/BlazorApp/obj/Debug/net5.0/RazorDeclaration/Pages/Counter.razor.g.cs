@@ -94,10 +94,11 @@ using BlazorApp.Shared;
 #line 9 "C:\Users\The Chosen One\Source\Repos\PRT585-Group-B-Sem2-2021\Syed (S331720)\BlazorApp\Pages\Counter.razor"
        
     private int currentCount = 0;
+    public int newCount = 2;
 
     private void IncrementCount()
     {
-        currentCount++;
+        currentCount+=newCount;
     }
 
 #line default
