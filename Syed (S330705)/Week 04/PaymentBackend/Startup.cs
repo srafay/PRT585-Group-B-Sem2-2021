@@ -28,6 +28,7 @@ namespace PaymentBackend
             services.AddRazorPages();
             services.AddDbContext<PaymentDetailContext>(optionns =>
                 optionns.UseSqlServer(Configuration.GetConnectionString("PaymentDetailContext")));
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +45,12 @@ namespace PaymentBackend
                 app.UseHsts();
             }
 
+            //configurations to cosume the Web API from port : 4200 (Angualr App)
+            app.UseCors(options =>
+                options.WithOrigins("http://localhost:4200")
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -53,7 +60,9 @@ namespace PaymentBackend
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=PaymentDetails}/{action=api}/{id?}");
             });
         }
     }
