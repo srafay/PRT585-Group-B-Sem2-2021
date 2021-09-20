@@ -135,6 +135,9 @@ namespace LOGIC.Services.Implementation
                 //GET by ID Product 
                 var Product = await _product_operations.Read(id);
 
+                // Handle the case when the Product with this id is not found and Product is empty.
+                /* Code for Handling empty Product */
+
                 //MAP DB Product RESULTS
                 result.result_set = new Product_ResultSet
                 {
