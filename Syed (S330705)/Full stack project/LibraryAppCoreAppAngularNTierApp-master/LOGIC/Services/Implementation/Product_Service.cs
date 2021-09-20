@@ -135,20 +135,28 @@ namespace LOGIC.Services.Implementation
                 //GET by ID Product 
                 var Product = await _product_operations.Read(id);
 
-                // Handle the case when the Product with this id is not found and Product is empty.
-                /* Code for Handling empty Product */
-
-                //MAP DB Product RESULTS
-                result.result_set = new Product_ResultSet
+                // Handle the case when the Product with this id is not found and Product is null.
+                /* Code for Handling empty Product START */
+                if (Product is not null)
                 {
-                    product_id = Product.ProductID,
-                    product_name = Product.Product_Name,
-                    product_description = Product.Product_Description
-                };
+                    //MAP DB Product RESULTS
+                    result.result_set = new Product_ResultSet
+                    {
+                        product_id = Product.ProductID,
+                        product_name = Product.Product_Name,
+                        product_description = Product.Product_Description
+                    };
 
-                //SET SUCCESSFUL RESULT VALUES
-                result.userMessage = string.Format("Get ByID - Product obtained successfully");
-                result.internalMessage = "LOGIC.Services.Implementation.Product_Service: Get ByID() method executed successfully.";
+                    //SET SUCCESSFUL RESULT VALUES
+                    result.userMessage = string.Format("GetProductById - Product obtained successfully");
+                }
+                /* Code for Handling empty Product END */
+                else
+                {
+                    // Set the message for informing client that no product was found
+                    result.userMessage = string.Format("GetProductById - No Product found for id {0}", id);
+                }
+                result.internalMessage = "LOGIC.Services.Implementation.Product_Service: GetProductById() method executed successfully.";
                 result.success = true;
             }
             catch (Exception exception)
