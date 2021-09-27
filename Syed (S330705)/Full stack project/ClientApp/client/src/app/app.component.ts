@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IAPIResponse } from './models/apiresponse';
-import { IProduct } from './models/product';
+import { IAPIResponse } from './shared/models/apiresponse';
+import { IProduct } from './shared/models/product';
 import { HttpClient } from '@angular/common/http'
 
 @Component({
@@ -10,14 +10,18 @@ import { HttpClient } from '@angular/common/http'
 })
 export class AppComponent implements OnInit {
   title = 'Ecommerce';
-  products: IProduct[] = [];
+  api_response!: IAPIResponse;
+  products!: IProduct[];
+  URL_BACKEND: string = 'https://localhost:44341/api';
+  URL_GET_ALL_PRODUCTS: string = this.URL_BACKEND + '/Product/GetAllProducts/'
 
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.http.get('https://localhost:44341/api/Product/GetAllProducts').subscribe((response: any) => {
-      console.log(response);
-      this.products = response.result_set;
+    this.http.get(this.URL_GET_ALL_PRODUCTS).subscribe((response: any) => {
+      console.log(response); // Log to console for debugging purposes
+      this.api_response = response;
+      this.products = this.api_response.result_set;
     }, error => {
       console.log(error);
     })
