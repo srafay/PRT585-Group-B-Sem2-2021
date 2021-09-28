@@ -45,6 +45,8 @@ namespace DAL.DataContext
         public DbSet<Student> Students { get; set; }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Entities.Type> Types { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
