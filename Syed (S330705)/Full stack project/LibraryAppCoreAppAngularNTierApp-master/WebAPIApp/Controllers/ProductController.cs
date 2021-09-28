@@ -23,9 +23,9 @@ namespace WebAPIApp.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> AddProduct(string name, string description)
+        public async Task<IActionResult> AddProduct(string name, string description, Int64 price, string type, string brand)
         {
-            var result = await _Product_Service.AddProduct(name, description);
+            var result = await _Product_Service.AddProduct(name, description, price, type, brand);
             switch (result.success)
             {
                 case true:
@@ -55,7 +55,7 @@ namespace WebAPIApp.Controllers
         [Route("[action]")]
         public async Task<IActionResult> UpdateProduct(Product_Object product)
         {
-            var result = await _Product_Service.UpdateProduct(product.id, product.product_name, product.product_description);
+            var result = await _Product_Service.UpdateProduct(product.id, product.product_name, product.product_description, product.product_price, product.product_type, product.product_brand);
             switch (result.success)
             {
                 case true:
@@ -93,6 +93,36 @@ namespace WebAPIApp.Controllers
 
                 case false:
                     return StatusCode(500, result);
+            }
+        }
+
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> GetAllBrands()
+        {
+            var result = await _Product_Service.GetAllBrands();
+            switch (result.Count)
+            {
+                case 0:
+                    return StatusCode(500, result);
+
+                default:
+                    return Ok(result);
+            }
+        }
+
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> GetAllTypes()
+        {
+            var result = await _Product_Service.GetAllTypes();
+            switch (result.Count)
+            {
+                case 0:
+                    return StatusCode(500, result);
+
+                default:
+                    return Ok(result);
             }
         }
     }
