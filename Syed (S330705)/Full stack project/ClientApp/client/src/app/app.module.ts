@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { ShopModule } from './shop/shop.module';
 import { AppRoutingModule } from './app-routing.module';
+import { CrudModule } from './crud/crud.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserAnimationsModule,
     CoreModule,
     ShopModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CrudModule
   ],
   providers: [],
   bootstrap: [AppComponent]
