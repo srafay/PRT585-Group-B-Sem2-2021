@@ -23,9 +23,9 @@ namespace WebAPIApp.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> AddProduct(string name, string description, Int64 price, string type, string brand)
+        public async Task<IActionResult> AddProduct(Product_Object product)
         {
-            var result = await _Product_Service.AddProduct(name, description, price, type, brand);
+            var result = await _Product_Service.AddProduct(product.product_name, product.product_description, product.product_price, product.product_type, product.product_brand);
             switch (result.success)
             {
                 case true:
@@ -66,7 +66,7 @@ namespace WebAPIApp.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> DeleteProduct(int product_id)
         {
@@ -81,7 +81,7 @@ namespace WebAPIApp.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> GetProductById(int product_id)
         {

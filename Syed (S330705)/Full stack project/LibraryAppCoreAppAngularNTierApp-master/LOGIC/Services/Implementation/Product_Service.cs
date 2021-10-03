@@ -47,7 +47,7 @@ namespace LOGIC.Services.Implementation
                 Product_ResultSet productAdded = new Product_ResultSet
                 {
                     product_name = Product.Product_Name,
-                    product_id = Product.ProductID,
+                    id = Product.ProductID,
                     product_description = Product.Product_Description,
                     product_price = Product.Product_Price,
                     product_type = Product.Product_Type,
@@ -113,7 +113,7 @@ namespace LOGIC.Services.Implementation
                 {
                     result.result_set.Add(new Product_ResultSet
                     {
-                        product_id = productItem.ProductID,
+                        id = productItem.ProductID,
                         product_name = productItem.Product_Name,
                         product_description = productItem.Product_Description,
                         product_brand = productItem.Product_Brand,
@@ -153,7 +153,7 @@ namespace LOGIC.Services.Implementation
                     //MAP DB Product RESULTS
                     result.result_set = new Product_ResultSet
                     {
-                        product_id = Product.ProductID,
+                        id = Product.ProductID,
                         product_name = Product.Product_Name,
                         product_description = Product.Product_Description,
                         product_type = Product.Product_Type,
@@ -212,7 +212,7 @@ namespace LOGIC.Services.Implementation
                 //MANUAL MAPPING OF RETURNED Product VALUES TO OUR Product_ResultSet
                 Product_ResultSet productUpdated = new Product_ResultSet
                 {
-                    product_id = Product.ProductID,
+                    id = Product.ProductID,
                     product_name = Product.Product_Name,
                     product_description = Product.Product_Description,
                     product_brand = Product.Product_Brand,
