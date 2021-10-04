@@ -8,6 +8,7 @@ import { ICrudResponse } from '../shared/models/crudresponse';
 import { NotificationService } from '@progress/kendo-angular-notification';
 import { IKendoNotifStyles } from '../shared/models/kendonotificationstyles';
 import { ViewportScroller } from '@angular/common';
+import { ActionsLayout } from '@progress/kendo-angular-dialog';
 
 @Component({
   selector: 'app-crud',
@@ -26,6 +27,12 @@ export class CrudComponent implements OnInit {
   allEmployees?: IProduct[];  
   employeeIdUpdate:any;  
   message = '';
+
+  /* Kendo variables */
+  opened: boolean = false;
+  actionsLayout: ActionsLayout = "normal";
+  primaryValue: boolean = true;
+  /* Kendo variables */
   
   constructor(private formbulider: FormBuilder, private employeeService:CrudService,
     private notificationService: NotificationService,
@@ -42,6 +49,20 @@ export class CrudComponent implements OnInit {
       product_brand: ['', [Validators.required]],  
     });  
     this.loadAllEmployees();  
+  }
+
+  public onDialogClose() {
+    this.showSuccess("No data was deleted", "info", "slide", "center");
+    this.opened = false;
+  }
+
+  public onDeleteData(employee_id: number) {
+    this.deleteEmployee(employee_id);
+    this.opened = false;
+  }
+
+  public open() {
+    this.opened = true;
   }
 
   onScrollToTop(): void {
@@ -125,17 +146,15 @@ export class CrudComponent implements OnInit {
     }  
   }   
   deleteEmployee(employeeId: number) {  
-    if (confirm("Are you sure you want to delete this ?")) {   
     this.employeeService.deleteEmployeeById(employeeId).subscribe(() => {  
-      this.dataSaved = true;  
-      this.message = 'Record Deleted Succefully';  
-      this.loadAllEmployees();  
-      this.employeeIdUpdate = null;  
-      this.employeeForm.reset();
-      this.showSuccess(this.message, "warning", "slide", "left");
+    this.dataSaved = true;  
+    this.message = 'Record Deleted Succefully';  
+    this.loadAllEmployees();  
+    this.employeeIdUpdate = null;  
+    this.employeeForm.reset();
+    this.showSuccess(this.message, "warning", "slide", "left");
   
     });  
-  }  
 }  
   resetForm() {  
     this.employeeForm.reset();  

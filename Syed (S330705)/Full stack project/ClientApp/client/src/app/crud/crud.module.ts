@@ -22,6 +22,8 @@ import { NotificationModule } from '@progress/kendo-angular-notification';
 import { TextBoxModule } from "@progress/kendo-angular-inputs";
 import { FloatingLabelModule } from "@progress/kendo-angular-label";
 import { LabelModule } from '@progress/kendo-angular-label';
+import { ButtonsModule } from "@progress/kendo-angular-buttons";
+import { DialogsModule } from "@progress/kendo-angular-dialog";
 
 
 @NgModule({
@@ -48,7 +50,9 @@ import { LabelModule } from '@progress/kendo-angular-label';
     NotificationModule,
     TextBoxModule,
     FloatingLabelModule,
-    LabelModule
+    LabelModule,
+    ButtonsModule,
+    DialogsModule
   ],
   exports: [
     CrudComponent
