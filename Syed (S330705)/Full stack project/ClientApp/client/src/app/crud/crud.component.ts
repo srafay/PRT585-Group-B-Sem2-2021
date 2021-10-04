@@ -7,6 +7,7 @@ import { IAPIResponse } from '../shared/models/apiresponse';
 import { ICrudResponse } from '../shared/models/crudresponse';
 import { NotificationService } from '@progress/kendo-angular-notification';
 import { IKendoNotifStyles } from '../shared/models/kendonotificationstyles';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-crud',
@@ -27,7 +28,8 @@ export class CrudComponent implements OnInit {
   message = '';
   
   constructor(private formbulider: FormBuilder, private employeeService:CrudService,
-    private notificationService: NotificationService) { }
+    private notificationService: NotificationService,
+    private readonly viewport: ViewportScroller) { }
   
   ngOnInit() {  
     this.employeeForm = this.formbulider.group({  
@@ -40,6 +42,10 @@ export class CrudComponent implements OnInit {
       product_brand: ['', [Validators.required]],  
     });  
     this.loadAllEmployees();  
+  }
+
+  onScrollToTop(): void {
+    this.viewport.scrollToPosition([0, 0]);
   }
 
   public showSuccess(message: string, notifStyle: IKendoNotifStyles["notifStyle"], animType: IKendoNotifStyles["animType"], horizontalPos: IKendoNotifStyles["horizontalPos"]): void {
@@ -82,6 +88,7 @@ export class CrudComponent implements OnInit {
       this.employeeForm.controls['product_pictureurl'].setValue(employee.result_set.product_pictureurl);  
       this.employeeForm.controls['product_type'].setValue(employee.result_set.product_type);  
       this.employeeForm.controls['product_brand'].setValue(employee.result_set.product_brand);  
+      this.onScrollToTop();
     });  
   
   }  
