@@ -48,6 +48,10 @@ export class CrudComponent implements OnInit {
     this.viewport.scrollToPosition([0, 0]);
   }
 
+  onScrollToBottom(): void {
+    this.viewport.scrollToPosition([0, 100000000]);
+  }
+
   public showSuccess(message: string, notifStyle: IKendoNotifStyles["notifStyle"], animType: IKendoNotifStyles["animType"], horizontalPos: IKendoNotifStyles["horizontalPos"]): void {
     // console.log("showSuccess called");
     this.notificationService.show({
@@ -73,7 +77,7 @@ export class CrudComponent implements OnInit {
     this.dataSaved = false;  
     const employee = value;  
     this.CreateEmployee(employee);  
-    this.employeeForm.reset();  
+    this.employeeForm.reset();
   }  
   loadEmployeeToEdit(employeeId: number) {
     // this.resetForm();  
@@ -104,6 +108,7 @@ export class CrudComponent implements OnInit {
           this.showSuccess(this.message, "success", "slide", "left");
           this.employeeIdUpdate = null;  
           this.employeeForm.reset();
+          this.onScrollToBottom();
         }  
       );  
     } else {  
