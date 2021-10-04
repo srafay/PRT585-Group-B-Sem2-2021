@@ -9,7 +9,7 @@
     <br><br>  
       <mat-card-content>
         <form [formGroup]="employeeForm"(ngSubmit)="onFormSubmit(employeeForm.value)">  
-                <table>  
+                <table #appendTo style="margin-right: auto; margin-left: auto;">  
                   <tr>  
                     <td>  
                       <!-- <mat-form-field class="demo-full-width"> -->

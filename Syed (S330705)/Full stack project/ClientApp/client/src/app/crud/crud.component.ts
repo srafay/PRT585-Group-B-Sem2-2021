@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { IProduct } from '../shared/models/product';
 import { FormBuilder, Validators } from '@angular/forms';  
 import { Observable } from 'rxjs';
@@ -14,6 +14,10 @@ import { IKendoNotifStyles } from '../shared/models/kendonotificationstyles';
   styleUrls: ['./crud.component.css']
 })
 export class CrudComponent implements OnInit {
+
+  // // Only use if we want to display notification in a specific container tagged with #appendTo
+  // @ViewChild("appendTo", { read: ViewContainerRef })
+  // public appendTo?: ViewContainerRef;
 
   dataSaved = false;  
   employeeForm: any;  
@@ -41,6 +45,7 @@ export class CrudComponent implements OnInit {
   public showSuccess(message: string, notifStyle: IKendoNotifStyles["notifStyle"], animType: IKendoNotifStyles["animType"], horizontalPos: IKendoNotifStyles["horizontalPos"]): void {
     // console.log("showSuccess called");
     this.notificationService.show({
+      // appendTo: this.appendTo,
       content: message,
       cssClass: "button-notification",
       animation: { type: animType, duration: 400 },
