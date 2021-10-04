@@ -13,23 +13,24 @@ export class CrudService {
   url = 'https://localhost:44341/api/Product';  
   constructor(private http: HttpClient) { }  
   getAllEmployee() {
-    console.log("getAllEmployee");
+    // console.log("getAllEmployee");
     this.response = this.http.get<any>(this.url + '/GetAllProducts');
     // console.log(this.response);
     return this.response;
   }  
   getEmployeeById(employeeId: number): Observable<ICrudResponse> {  
-    console.log("getEmployeeById");
+    // console.log("getEmployeeById");
     return this.http.get<ICrudResponse>(this.url + '/GetProductById?product_id=' + employeeId);
   }  
   createEmployee(employee: IProduct): Observable<ICrudResponse> {  
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'accept': '*/*'}) };
+    // console.log(employee);
     return this.http.post<ICrudResponse>(this.url + '/AddProduct/',  
     employee, httpOptions);  
   }  
   updateEmployee(employee: IProduct): Observable<ICrudResponse> {  
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'accept': '*/*'}) };  
-    console.log(employee);
+    // console.log(employee);
     return this.http.post<ICrudResponse>(this.url + '/UpdateProduct/',  
     employee, httpOptions);  
   }  

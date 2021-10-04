@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { CrudService } from './crud.service';
 import { IAPIResponse } from '../shared/models/apiresponse';
 import { ICrudResponse } from '../shared/models/crudresponse';
+import { NotificationService } from '@progress/kendo-angular-notification';
+import { IKendoNotifStyles } from '../shared/models/kendonotificationstyles';
 
 @Component({
   selector: 'app-crud',
@@ -18,9 +20,10 @@ export class CrudComponent implements OnInit {
   response:any;
   allEmployees?: IProduct[];  
   employeeIdUpdate:any;  
-  massage = '';
+  message = '';
   
-  constructor(private formbulider: FormBuilder, private employeeService:CrudService) { }  
+  constructor(private formbulider: FormBuilder, private employeeService:CrudService,
+    private notificationService: NotificationService) { }
   
   ngOnInit() {  
     this.employeeForm = this.formbulider.group({  
@@ -33,11 +36,24 @@ export class CrudComponent implements OnInit {
       product_brand: ['', [Validators.required]],  
     });  
     this.loadAllEmployees();  
-  }  
+  }
+
+  public showSuccess(message: string, notifStyle: IKendoNotifStyles["notifStyle"], animType: IKendoNotifStyles["animType"], horizontalPos: IKendoNotifStyles["horizontalPos"]): void {
+    // console.log("showSuccess called");
+    this.notificationService.show({
+      content: message,
+      cssClass: "button-notification",
+      animation: { type: animType, duration: 400 },
+      position: { horizontal: horizontalPos, vertical: "bottom" },
+      type: { style: notifStyle, icon: true },
+      closable: false,
+    });
+  }
+
   loadAllEmployees() {  
     this.employeeService.getAllEmployee().subscribe((response: any) => {
       this.allEmployees = response.result_set;
-      console.log(this.allEmployees);
+      // console.log(this.allEmployees);
     }, (error: any) => {
       console.log(error);
     })
@@ -52,7 +68,7 @@ export class CrudComponent implements OnInit {
     // this.resetForm();  
     this.employeeService.getEmployeeById(employeeId).subscribe(employee=> {  
       this.employeeForm.reset();  
-      this.massage = '';  
+      this.message = '';  
       this.dataSaved = false;  
       this.employeeIdUpdate = Number(employee.result_set.id);  
       this.employeeForm.controls['product_name'].setValue(employee.result_set.product_name);  
@@ -66,13 +82,16 @@ export class CrudComponent implements OnInit {
   }  
   CreateEmployee(employee: IProduct) {  
     if (this.employeeIdUpdate == null) {  
+      // Set employee id to 0 (random) to make sure API doesnt give error
+      employee.id = 0;
       this.employeeService.createEmployee(employee).subscribe(  
         () => {  
           this.dataSaved = true;  
-          this.massage = 'Record saved Successfully';  
-          this.loadAllEmployees();  
+          this.message = 'Record saved Successfully';  
+          this.loadAllEmployees();
+          this.showSuccess(this.message, "success", "slide", "left");
           this.employeeIdUpdate = null;  
-          this.employeeForm.reset();  
+          this.employeeForm.reset();
         }  
       );  
     } else {  
@@ -80,10 +99,11 @@ export class CrudComponent implements OnInit {
       
       this.employeeService.updateEmployee(employee).subscribe(() => {  
         this.dataSaved = true;  
-        this.massage = 'Record Updated Successfully';  
+        this.message = 'Record Updated Successfully';  
         this.loadAllEmployees();  
         this.employeeIdUpdate = null;  
-        this.employeeForm.reset();  
+        this.employeeForm.reset();
+        this.showSuccess(this.message, "info", "slide", "left");
       });  
     }  
   }   
@@ -91,17 +111,18 @@ export class CrudComponent implements OnInit {
     if (confirm("Are you sure you want to delete this ?")) {   
     this.employeeService.deleteEmployeeById(employeeId).subscribe(() => {  
       this.dataSaved = true;  
-      this.massage = 'Record Deleted Succefully';  
+      this.message = 'Record Deleted Succefully';  
       this.loadAllEmployees();  
       this.employeeIdUpdate = null;  
-      this.employeeForm.reset();  
+      this.employeeForm.reset();
+      this.showSuccess(this.message, "warning", "slide", "left");
   
     });  
   }  
 }  
   resetForm() {  
     this.employeeForm.reset();  
-    this.massage = '';  
+    this.message = '';  
     this.dataSaved = false;  
   }
 

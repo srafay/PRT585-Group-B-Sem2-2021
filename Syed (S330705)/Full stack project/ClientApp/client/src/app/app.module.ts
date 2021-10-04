@@ -9,6 +9,8 @@ import { CoreModule } from './core/core.module';
 import { ShopModule } from './shop/shop.module';
 import { AppRoutingModule } from './app-routing.module';
 import { CrudModule } from './crud/crud.module';
+import { NotificationModule } from '@progress/kendo-angular-notification';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { CrudModule } from './crud/crud.module';
     CoreModule,
     ShopModule,
     AppRoutingModule,
-    CrudModule
+    CrudModule,
+    NotificationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
