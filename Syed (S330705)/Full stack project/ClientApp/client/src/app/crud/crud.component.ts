@@ -27,7 +27,7 @@ export class CrudComponent implements OnInit {
       id: [Number(''), [Validators.required]],  
       product_name: ['', [Validators.required]],  
       product_description: ['', [Validators.required]],  
-      product_price: [Number(''), [Validators.required]],  
+      product_price: ['', [Validators.required]],  
       product_pictureurl: ['', [Validators.required]],  
       product_type: ['', [Validators.required]],  
       product_brand: ['', [Validators.required]],  

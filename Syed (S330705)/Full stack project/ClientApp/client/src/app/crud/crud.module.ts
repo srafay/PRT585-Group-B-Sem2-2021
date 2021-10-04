@@ -40,7 +40,7 @@ import { CrudService } from './crud.service';
     MatFormFieldModule,  
     MatInputModule,  
     MatTooltipModule,  
-    MatToolbarModule,
+    MatToolbarModule
   ],
   exports: [
     CrudComponent
