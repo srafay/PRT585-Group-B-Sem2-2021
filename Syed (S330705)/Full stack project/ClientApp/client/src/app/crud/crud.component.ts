@@ -40,11 +40,11 @@ export class CrudComponent implements OnInit {
   
   ngOnInit() {  
     this.employeeForm = this.formbulider.group({  
-      id: [Number(''), [Validators.required]],  
+      id: [Number(''), []],  
       product_name: ['', [Validators.required]],  
       product_description: ['', [Validators.required]],  
       product_price: ['', [Validators.required]],  
-      product_pictureurl: ['', [Validators.required]],  
+      product_pictureurl: ['', []],  // optional field
       product_type: ['', [Validators.required]],  
       product_brand: ['', [Validators.required]],  
     });  
@@ -107,7 +107,8 @@ export class CrudComponent implements OnInit {
       this.message = '';  
       this.dataSaved = false;  
       this.employeeIdUpdate = Number(employee.result_set.id);  
-      this.employeeForm.controls['product_name'].setValue(employee.result_set.product_name);  
+      this.employeeForm.controls['id'].setValue(Number(employee.result_set.id));
+      this.employeeForm.controls['product_name'].setValue(employee.result_set.product_name);
      this.employeeForm.controls['product_description'].setValue(employee.result_set.product_description);  
       this.employeeForm.controls['product_price'].setValue(Number(employee.result_set.product_price));  
       this.employeeForm.controls['product_pictureurl'].setValue(employee.result_set.product_pictureurl);  
@@ -150,7 +151,7 @@ export class CrudComponent implements OnInit {
     this.dataSaved = true;  
     this.message = 'Record Deleted Succefully';  
     this.loadAllEmployees();  
-    this.employeeIdUpdate = null;  
+    this.employeeIdUpdate = null;
     this.employeeForm.reset();
     this.showSuccess(this.message, "warning", "slide", "left");
   
@@ -159,7 +160,8 @@ export class CrudComponent implements OnInit {
   resetForm() {  
     this.employeeForm.reset();  
     this.message = '';  
-    this.dataSaved = false;  
+    this.dataSaved = false;
+    this.employeeIdUpdate = null;
   }
 
 }

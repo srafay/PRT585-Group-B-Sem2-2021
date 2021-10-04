@@ -7,7 +7,7 @@
     </mat-toolbar>
     <br><br>  
     <mat-card-content>
-      <form [formGroup]="employeeForm"(ngSubmit)="onFormSubmit(employeeForm.value)">  
+      <form [formGroup]="employeeForm" (ngSubmit)="onFormSubmit(employeeForm.value)">  
       <table #appendTo style="margin-right: auto; margin-left: auto;">
         <tr>
           <td>
@@ -15,13 +15,13 @@
             <div class="form-group">
               <kendo-floatinglabel text="Enter Product Name">
                 <!-- <input formControlName="product_name" matTooltip="Enter Employee Name" matInput placeholder="n">   -->
-                <input formControlName="product_name" kendoTextBox name="product_name" class="form-control">
+                <input formControlName="product_name" kendoTextBox name="product_name" class="form-control" id="product_name">
               </kendo-floatinglabel>
               <!-- </mat-form-field>   -->
             </div>
-            <mat-error>  
+            <!-- <mat-error>  
               <span *ngIf="!employeeForm.get('product_name').value && employeeForm.get('product_name').touched"></span>  
-            </mat-error>
+            </mat-error> -->
           </td>
           <td>
             <!-- <mat-form-field class="demo-full-width"> -->
@@ -41,7 +41,7 @@
             <div class="form-group">
               <kendo-floatinglabel text="Enter Product Price">
                 <!-- <input formControlName="product_price" matTooltip="Enter product_price" matInput placeholder="p" type="number">   -->
-                <input formControlName="product_price" class="form-control" kendoTextBox name="product_price">
+                <input formControlName="product_price" class="form-control" kendoTextBox name="product_price" type="number">
               </kendo-floatinglabel>
               <!-- </mat-form-field>   -->
             </div>
@@ -94,7 +94,7 @@
         <tr>
           <td></td>
           <td  class="content-center">
-            <button type="submit" mat-raised-button color="accent" matTooltip="Click Submit Button" [disabled]="employeeForm.valid">Submit</button>
+            <button type="submit" mat-raised-button color="accent" matTooltip="Click Submit Button" [disabled]="!employeeForm.valid">Submit</button>
             <!-- <button type="submit" mat-raised-button color="accent" matTooltip="Click Submit Button">Submit</button> -->
             <button type="reset" mat-raised-button color="accent" matTooltip="Click Reset Button" (click)="resetForm()">Reset</button>  
           </td>
