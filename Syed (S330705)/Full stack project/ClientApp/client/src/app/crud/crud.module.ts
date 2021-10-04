@@ -18,6 +18,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CrudService } from './crud.service';
+import { NotificationModule } from '@progress/kendo-angular-notification';
+import { TextBoxModule } from "@progress/kendo-angular-inputs";
+import { FloatingLabelModule } from "@progress/kendo-angular-label";
+import { LabelModule } from '@progress/kendo-angular-label';
 
 
 @NgModule({
@@ -40,7 +44,11 @@ import { CrudService } from './crud.service';
     MatFormFieldModule,  
     MatInputModule,  
     MatTooltipModule,  
-    MatToolbarModule
+    MatToolbarModule,
+    NotificationModule,
+    TextBoxModule,
+    FloatingLabelModule,
+    LabelModule
   ],
   exports: [
     CrudComponent

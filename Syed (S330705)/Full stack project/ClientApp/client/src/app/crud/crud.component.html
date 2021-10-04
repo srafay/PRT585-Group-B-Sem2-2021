@@ -14,19 +14,23 @@
                     <td>  
                       <!-- <mat-form-field class="demo-full-width"> -->
                       <div class="form-group">
+                        <kendo-floatinglabel text="Enter Product Name">
                         <!-- <input formControlName="product_name" matTooltip="Enter Employee Name" matInput placeholder="n">   -->
-                        <input formControlName="product_name" class="form-control" placeholder="Enter Product Name">
+                        <input formControlName="product_name" kendoTextBox name="product_name" class="form-control">
+                      </kendo-floatinglabel>
                       <!-- </mat-form-field>   -->
-                      </div>  
+                      </div>
                       <mat-error>  
                         <span *ngIf="!employeeForm.get('product_name').value && employeeForm.get('product_name').touched"></span>  
                       </mat-error>  
                     </td>  
                     <td>  
                       <!-- <mat-form-field class="demo-full-width"> -->
-                      <div class="form-group">  
+                      <div class="form-group">
+                        <kendo-floatinglabel text="Enter Product Description">
                         <!-- <input formControlName="product_description" matTooltip="Enter Employee Name" matInput placeholder="d">   -->
-                        <input formControlName="product_description" class="form-control" placeholder="Enter Product Description">
+                        <input formControlName="product_description" class="form-control" kendoTextBox name="product_description">
+                      </kendo-floatinglabel>
                       <!-- </mat-form-field>   -->
                       </div>  
                       <mat-error>  
@@ -35,9 +39,11 @@
                     </td> 
                     <td>  
                       <!-- <mat-form-field class="demo-full-width"> -->
-                      <div class="form-group">  
+                      <div class="form-group"> 
+                        <kendo-floatinglabel text="Enter Product Price"> 
                         <!-- <input formControlName="product_price" matTooltip="Enter product_price" matInput placeholder="p" type="number">   -->
-                        <input formControlName="product_price" class="form-control" placeholder="Enter Product Price">
+                        <input formControlName="product_price" class="form-control" kendoTextBox name="product_price">
+                      </kendo-floatinglabel>
                       <!-- </mat-form-field>   -->
                       </div>  
                       <mat-error>  
@@ -49,19 +55,23 @@
                     <td class="tbl1">  
                       <!-- <mat-form-field class="demo-full-width"> -->
                       <div class="form-group">  
+                        <kendo-floatinglabel text="Picture URL" [optional]="true">
                         <!-- <input formControlName="product_pictureurl" matTooltip="Enter Employee product_pictureUrl" matInput placeholder="u">   -->
-                        <input formControlName="product_pictureurl" class="form-control" placeholder="Enter Product Picture URL">
+                        <input formControlName="product_pictureurl" class="form-control" kendoTextBox name="product_pictureurl">
+                      </kendo-floatinglabel>
                       <!-- </mat-form-field>   -->
-                      </div>  
+                      </div>
                       <mat-error>  
                         <span *ngIf="!employeeForm.get('product_pictureurl').value && employeeForm.get('product_pictureurl').touched"></span>  
                       </mat-error>  
                     </td>  
                     <td class="tbl1">  
                       <!-- <mat-form-field class="demo-full-width"> -->
-                      <div class="form-group">  
+                      <div class="form-group"> 
+                        <kendo-floatinglabel text="Enter Product Type">
                         <!-- <input formControlName="product_type" matTooltip="Enter Employee product_type" matInput placeholder="t">   -->
-                        <input formControlName="product_type" class="form-control" placeholder="Enter Product Type">
+                        <input formControlName="product_type" class="form-control" kendoTextBox name="product_type">
+                      </kendo-floatinglabel>
                       <!-- </mat-form-field>   -->
                       </div>  
                       <mat-error>  
@@ -70,9 +80,11 @@
                     </td> 
                     <td class="tbl1">  
                       <!-- <mat-form-field class="demo-full-width"> -->
-                      <div class="form-group">  
+                      <div class="form-group">
+                        <kendo-floatinglabel text="Enter Product Brand">
                         <!-- <input formControlName="product_brand" matTooltip="Enter product_brand" matInput placeholder="b">   -->
-                        <input formControlName="product_brand" class="form-control" placeholder="Enter Product Brand">
+                        <input formControlName="product_brand" class="form-control" kendoTextBox name="product_brand">
+                      </kendo-floatinglabel>
                       <!-- </mat-form-field>   -->
                       </div>  
                       <mat-error>  
