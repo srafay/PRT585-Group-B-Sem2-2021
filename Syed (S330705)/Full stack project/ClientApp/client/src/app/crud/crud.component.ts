@@ -9,6 +9,8 @@ import { NotificationService } from '@progress/kendo-angular-notification';
 import { IKendoNotifStyles } from '../shared/models/kendonotificationstyles';
 import { ViewportScroller } from '@angular/common';
 import { ActionsLayout } from '@progress/kendo-angular-dialog';
+import { DialItem } from '@progress/kendo-angular-buttons';
+import { pdf } from '@progress/kendo-drawing';
 
 @Component({
   selector: 'app-crud',
@@ -32,6 +34,24 @@ export class CrudComponent implements OnInit {
   opened: boolean = false;
   actionsLayout: ActionsLayout = "normal";
   primaryValue: boolean = true;
+
+  public exportItems: Array<DialItem> = [
+    { icon: "email", label: "Send as Email", disabled: true },
+    { icon: "clip", label: "Save as PDF" },
+    { icon: "file-txt", label: "Save as Excel file", disabled: true }
+  ];
+
+  public clicked = false;
+  public clickedContact?: DialItem;
+
+  public onDialItemClick(event: any, viewHook:any): void {
+    this.clickedContact = event.item;
+    this.clicked = true;
+    // Check if PDF option was clicked
+    if (this.clickedContact?.icon == "clip") {
+      viewHook.saveAs('products_list.pdf');
+    }
+  }
   /* Kendo variables */
   
   constructor(private formbulider: FormBuilder, private employeeService:CrudService,

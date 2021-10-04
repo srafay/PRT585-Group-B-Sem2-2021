@@ -25,11 +25,13 @@ import { LabelModule } from '@progress/kendo-angular-label';
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
 import { DialogsModule } from "@progress/kendo-angular-dialog";
 import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
+import { ProductItemComponent } from './product-item/product-item.component';
 
 
 @NgModule({
   declarations: [
-    CrudComponent
+    CrudComponent,
+    ProductItemComponent
   ],
   imports: [  
     FormsModule,  

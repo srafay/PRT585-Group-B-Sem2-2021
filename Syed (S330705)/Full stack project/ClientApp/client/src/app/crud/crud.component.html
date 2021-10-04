@@ -1,8 +1,8 @@
 <div class="container">
   <mat-card>
-    <mat-toolbar color="accent">
+    <mat-toolbar color="primary">
       <div align="center" style="color:white;text-align: right;">  
-        CRUD operation for Product (Calling WebAPI from Angular)  
+        CRUD operation (KendoUI and Angular Material)
       </div>
     </mat-toolbar>
     <br><br>  
@@ -94,9 +94,9 @@
         <tr>
           <td></td>
           <td  class="content-center">
-            <button type="submit" mat-raised-button color="accent" matTooltip="Click Submit Button" [disabled]="!employeeForm.valid">Submit</button>
+            <button type="submit" mat-raised-button color="primary" matTooltip="Click to update or add a new product" [disabled]="!employeeForm.valid">Submit</button>
             <!-- <button type="submit" mat-raised-button color="accent" matTooltip="Click Submit Button">Submit</button> -->
-            <button type="reset" mat-raised-button color="accent" matTooltip="Click Reset Button" (click)="resetForm()">Reset</button>  
+            <button type="reset" mat-raised-button color="warn" matTooltip="Click to reset product properties" (click)="resetForm()">Reset</button>  
           </td>
           <td>
             <!-- <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">  
@@ -127,11 +127,13 @@
           <td class="tbl2">{{employee.product_type}}</td>
           <td class="tbl2">{{employee.product_brand}}</td>
           <td class="tbl2">  
-            <button type="button" class="btn btn-info"matTooltip="Click Edit Button"(click)="loadEmployeeToEdit(employee.id)">Edit</button>  
+            <!-- <button type="button" class="btn btn-info" matTooltip="Click to modify this Product"(click)="loadEmployeeToEdit(employee.id)">Edit</button>   -->
+            <button type="button" mat-raised-button color="primary" matTooltip="Click to modify this Product"(click)="loadEmployeeToEdit(employee.id)">Edit</button>  
           </td>
           <td class="tbl2">  
             <!-- <button type="button" class="btn btn-danger"matTooltip="Click Delete Button"(click)="deleteEmployee(employee.id)">Delete</button> -->
-            <button *ngIf="!opened" (click)="open()" type="button" class="btn btn-danger">Delete</button>
+            <!-- <button *ngIf="!opened" (click)="open()" type="button" class="btn btn-danger" matTooltip="Click to delete this Product">Delete</button> -->
+            <button *ngIf="!opened" mat-raised-button color="warn" (click)="open()" type="button"  matTooltip="Click to delete this Product">Delete</button>
             <kendo-dialog *ngIf="opened" (close)="onDialogClose()">
               <kendo-dialog-titlebar>
                 <div style="font-size: 18px; line-height: 1.3em;">
@@ -151,6 +153,30 @@
         </tr>
       </table>
       </form>  
+        <!-- <button class="k-button" (click)="pdf.saveAs('products_list.pdf')">
+          Save As PDF...
+        </button> -->
+      <!-- Hidden from user -->
+      <div class="hidden-custom">
+        <kendo-pdf-export #pdf margin="2cm">
+          <app-product-item [allEmployees]="allEmployees"></app-product-item>
+        </kendo-pdf-export>
+    </div>
+    <!-- Hidden from user -->
     </mat-card-content>
   </mat-card>
 </div>
+<!-- <kendo-floatingactionbutton
+          text="Save As PDF"
+          icon="clip"
+          themeColor="info"
+          (click)="pdf.saveAs('products_list.pdf')">
+  </kendo-floatingactionbutton> -->
+  <kendo-floatingactionbutton
+        icon="share"
+        text="Export Products"
+        themeColor="info"
+        [dialItems]="exportItems"
+        (dialItemClick)="onDialItemClick($event, pdf)"
+      >
+      </kendo-floatingactionbutton>
