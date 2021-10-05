@@ -1,3 +1,6 @@
+require('bootstrap/dist/css/bootstrap.min.css');
+require('bootstrap');
+
 interface Todo {
   description: string;
   done: boolean;

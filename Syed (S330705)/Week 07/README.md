@@ -20,3 +20,5 @@ This is week 07 of the Software Engineering Practice. For this week, following t
 	+ this runs the hello world and verifies aurelia installation
 - Follow the tutorial for TODO app:
 	+ https://aurelia.io/docs/tutorials/creating-a-todo-app/
+- Add Bootstrap and JQuery to aurelia:
+	+ https://riptutorial.com/aurelia/example/6256/adding-bootstrap-to-a-cli-application
