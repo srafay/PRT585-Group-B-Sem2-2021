@@ -74,15 +74,17 @@ export class CrudComponent implements OnInit {
   public onDialogClose() {
     this.showSuccess("No data was deleted", "info", "slide", "center");
     this.opened = false;
+    this.employeeIdUpdate = null;
   }
 
-  public onDeleteData(employee_id: number) {
-    this.deleteEmployee(employee_id);
+  public onDeleteData() {
+    this.deleteEmployee(this.employeeIdUpdate);
     this.opened = false;
   }
 
-  public open() {
+  public open(prod_id: number) {
     this.opened = true;
+    this.employeeIdUpdate = prod_id;
   }
 
   onScrollToTop(): void {

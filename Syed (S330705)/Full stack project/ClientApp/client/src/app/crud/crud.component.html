@@ -133,7 +133,7 @@
           <td class="tbl2">  
             <!-- <button type="button" class="btn btn-danger"matTooltip="Click Delete Button"(click)="deleteEmployee(employee.id)">Delete</button> -->
             <!-- <button *ngIf="!opened" (click)="open()" type="button" class="btn btn-danger" matTooltip="Click to delete this Product">Delete</button> -->
-            <button *ngIf="!opened" mat-raised-button color="warn" (click)="open()" type="button"  matTooltip="Click to delete this Product">Delete</button>
+            <button *ngIf="!opened" mat-raised-button color="warn" (click)="open(employee.id)" type="button"  matTooltip="Click to delete this Product">Delete</button>
             <kendo-dialog *ngIf="opened" (close)="onDialogClose()">
               <kendo-dialog-titlebar>
                 <div style="font-size: 18px; line-height: 1.3em;">
@@ -146,7 +146,7 @@
         
               <kendo-dialog-actions [layout]="actionsLayout">
                 <button kendoButton (click)="onDialogClose()">Cancel</button>
-                <button kendoButton (click)="onDeleteData(employee.id)" [primary]="true">Delete</button>
+                <button kendoButton (click)="onDeleteData()" [primary]="true">Delete</button>
               </kendo-dialog-actions>
             </kendo-dialog>
           </td>
