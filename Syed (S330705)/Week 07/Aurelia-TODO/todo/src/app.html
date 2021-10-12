@@ -1,0 +1,46 @@
+<template>
+  <require from="./components/custom-nav-bar.html"></require>
+  <custom-nav-bar></custom-nav-bar>
+
+  <!-- <div class="d-flex align-items-center mb-3">
+    <div class="form-group mr-3 mb-0">
+      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter a task here" />
+    </div>
+    <button type="submit" class="btn btn-primary mr-3" ng-click="saveTask()">Save</button>
+  </div> -->
+
+  <form class="mb3" submit.trigger="addTodo()">
+    <!-- <div class="mb-3">
+      <input type="text" class="form-control" value.bind="todoDescription">
+      <button type="submit" class="btn btn-primary" disabled.bind="!todoDescription">Add Todo</button>
+    </div> -->
+    <div class="input-group d-flex align-items-center mb-3">
+      <input type="text" value.bind="todoDescription" class="form-control" placeholder="Enter a task here" aria-label="Add Todo item description">
+      <div class="input-group-append">
+        <button disabled.bind="!todoDescription" class="btn btn-primary" type="submit">Add Todo</button>
+      </div>
+    </div>
+  </form>
+
+  <table class="table" >
+    <tr>
+      <th class="tbl2">Task Done</th>
+      <th class="tbl2">Task Description</th>
+      <th class="tbl2">Action</th>
+    </tr>
+    <tr repeat.for="todo of todos">
+      <td class="tbl2"><input type="checkbox" checked.bind="todo.done"></td>
+      <td class="tbl2" css="text-decoration: ${todo.done ? 'line-through' : 'none'}">${todo.description}</td>
+      <td><button class="btn btn-danger" click.trigger="removeTodo(todo)">Remove</button></td>
+    </tr>
+  </table>
+  <!-- <ul>
+    <li repeat.for="todo of todos">
+      <input type="checkbox" checked.bind="todo.done">
+      <span css="text-decoration: ${todo.done ? 'line-through' : 'none'}">
+        ${todo.description}
+      </span>
+      <button click.trigger="removeTodo(todo)">Remove</button>
+    </li>
+  </ul> -->
+</template>
