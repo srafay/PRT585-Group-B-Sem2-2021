@@ -21,16 +21,15 @@ namespace WebAPIApp.Controllers
     {
         private IProduct_Service _Product_Service;
 
- 
 
 
-        public ProductController(IProduct_Service Product_Service, ILogger<ProductController> logger)
+
+        public ProductController(IProduct_Service Product_Service)
         {
             _Product_Service = Product_Service;
-            _logger = logger;
+  
 
         }
-        private readonly ILogger<ProductController> _logger;
 
         [HttpPost]
         [Route("[action]")]
@@ -40,11 +39,8 @@ namespace WebAPIApp.Controllers
             switch (result.success)
             {
                 case true:
-                    _logger.LogTrace("TRACEEE forecast ready!");
-                    _logger.LogCritical("CRITICAL EASDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
-                    _logger.LogError("ERROR EASDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
-                    _logger.LogInformation("Info EASDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
-                    _logger.LogDebug("Debug EASDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
+        
+
                     return Ok(result);
 
                 case false:
@@ -84,7 +80,7 @@ namespace WebAPIApp.Controllers
 
         [HttpGet]
         [Route("[action]")]
-        public async Task<IActionResult> DeleteProduct(int product_id)
+        public async Task<IActionResult> DeleteProduct(Int64 product_id)
         {
             var result = await _Product_Service.DeleteProduct(product_id);
             switch (result.success)

@@ -45,6 +45,8 @@ namespace WebAPIApp
             services.AddScoped<IProduct_Service, Product_Service>();
             services.AddScoped<IBrand_Service, Brand_Service>();
             services.AddScoped<IType_Service, Type_Service>();
+            services.AddScoped<IMyLogger_Service, MyLogger_Service>();
+            
             //services.AddScoped<IApplicant_Service, Applicant_Service>();
             //services.AddScoped<IGrade_Service, Grade_Service>();
             //services.AddScoped<IApplication_Service, Application_Service>();
