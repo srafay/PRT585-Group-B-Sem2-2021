@@ -1,4 +1,6 @@
-﻿using LOGIC.Services.Interfaces;
+﻿using Exceptionless;
+using Exceptionless.Models;
+using LOGIC.Services.Interfaces;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -29,6 +31,9 @@ namespace WebAPIApp.Controllers
             switch (result.success)
             {
                 case true:
+                    ExceptionlessClient.Default.SubmitEvent(new Event { Message = string.Format("Product Added successfully ({0}:{1})", 
+                        result.result_set.id, product.product_name), Type = "Product", Source = "AddProduct Controller" });
+                    // ExceptionlessClient.Default.SubmitLog("Logging made easy");
                     return Ok(result);
 
                 case false:

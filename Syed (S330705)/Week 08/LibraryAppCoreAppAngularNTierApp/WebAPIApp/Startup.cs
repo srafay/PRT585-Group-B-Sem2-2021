@@ -1,4 +1,6 @@
 //using LOGIC.Services.Implementation;
+using Exceptionless;
+using Exceptionless.Logging;
 using LOGIC.Services.Implementation;
 using LOGIC.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -90,6 +92,11 @@ namespace WebAPIApp
             app.UseRouting();
             app.UseCors();
             app.UseAuthorization();
+            /* Import Exceptionless */
+            app.UseExceptionless("kUrnuPOBwKE3Ek8hshHxvR6My9eCJcurb1cxu8vm");
+            ExceptionlessClient.Default.Configuration.UseFileLogger("D:\\Projects\\PRT585-Group-B-Sem2-2021\\Syed (S330705)\\Week 08\\LibraryAppCoreAppAngularNTierApp\\WebAPIApp\\exceptionless.log",
+                                                                    Exceptionless.Logging.LogLevel.Trace);
+            /*ExceptionlessClient.Default.Configuration.UseFolderStorage("D:\\Projects\\PRT585-Group-B-Sem2-2021\\Syed (S330705)\\Week 08\\LibraryAppCoreAppAngularNTierApp\\WebAPIApp\\");*/
 
             app.UseEndpoints(endpoints =>
             {

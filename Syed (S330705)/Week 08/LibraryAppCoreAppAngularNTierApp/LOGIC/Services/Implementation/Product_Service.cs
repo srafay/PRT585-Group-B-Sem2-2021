@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Exceptionless;
+
 
 namespace LOGIC.Services.Implementation
 {
@@ -67,6 +69,7 @@ namespace LOGIC.Services.Implementation
                 result.userMessage = "We failed to register your information for the Product product supplied. Please try again.";
                 result.internalMessage = string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: AddProduct(): {0}", exception.Message); ;
                 //Success by default is set to false & its always the last value we set in the try block, so we should never need to set it in the catch block.
+                exception.ToExceptionless().Submit();
             }
             return result;
         }
@@ -92,6 +95,7 @@ namespace LOGIC.Services.Implementation
                 result.userMessage = "We failed to Delete your information for the Product product supplied. Please try again.";
                 result.internalMessage = string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: DeleteProduct(): {0}", exception.Message); ;
                 //Success by default is set to false & its always the last value we set in the try block, so we should never need to set it in the catch block.
+                exception.ToExceptionless().Submit();
             }
             return result;
         }
@@ -134,6 +138,7 @@ namespace LOGIC.Services.Implementation
                 result.userMessage = "We failed fetch all the required Products from the database.";
                 result.internalMessage = string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: GetAllProducts(): {0}", exception.Message); ;
                 //Success by default is set to false & its always the last value we set in the try block, so we should never need to set it in the catch block.
+                exception.ToExceptionless().Submit();
             }
             return result;
         }
@@ -180,6 +185,7 @@ namespace LOGIC.Services.Implementation
                 result.userMessage = "We failed fetch Get ByID the required Product from the database.";
                 result.internalMessage = string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: Get ByID(): {0}", exception.Message); ;
                 //Success by default is set to false & its always the last value we set in the try block, so we should never need to set it in the catch block.
+                exception.ToExceptionless().Submit();
             }
             return result;
         }
@@ -233,6 +239,7 @@ namespace LOGIC.Services.Implementation
                 result.userMessage = "We failed to update your information for the Product supplied. Please try again.";
                 result.internalMessage = string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: UpdateProduct(): {0}", exception.Message); ;
                 //Success by default is set to false & its always the last value we set in the try block, so we should never need to set it in the catch block.
+                exception.ToExceptionless().Submit();
             }
             return result;
         }
@@ -272,6 +279,7 @@ namespace LOGIC.Services.Implementation
                 result.userMessage = "We failed fetch all the required Product Brands from the database.";
                 result.internalMessage = string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: GetAllBrands(): {0}", exception.Message); ;*/
                 //Success by default is set to false & its always the last value we set in the try block, so we should never need to set it in the catch block.
+                exception.ToExceptionless().Submit();
             }
             return unique_result;
         }
@@ -307,6 +315,7 @@ namespace LOGIC.Services.Implementation
                 result.userMessage = "We failed fetch all the required Product Types from the database.";
                 result.internalMessage = string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: GetAllTypes(): {0}", exception.Message); ;*/
                 //Success by default is set to false & its always the last value we set in the try block, so we should never need to set it in the catch block.
+                exception.ToExceptionless().Submit();
             }
             return result;
         }
