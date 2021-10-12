@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAPIApp.Models.Product;
+using static LOGIC.Services.Interfaces.ILogger_Service;
 
 namespace WebAPIApp.Controllers
 {
@@ -17,10 +18,12 @@ namespace WebAPIApp.Controllers
     public class ProductController : ControllerBase
     {
         private IProduct_Service _Product_Service;
+        private readonly ILogger_Service logger;
 
-        public ProductController(IProduct_Service Product_Service)
+        public ProductController(IProduct_Service Product_Service, ILogger_Service Logger_Service)
         {
             _Product_Service = Product_Service;
+            logger = Logger_Service;
         }
 
         [HttpPost]
@@ -31,12 +34,12 @@ namespace WebAPIApp.Controllers
             switch (result.success)
             {
                 case true:
-                    ExceptionlessClient.Default.SubmitEvent(new Event { Message = string.Format("Product Added successfully ({0}:{1})", 
-                        result.result_set.id, product.product_name), Type = "Product", Source = "AddProduct Controller" });
-                    // ExceptionlessClient.Default.SubmitLog("Logging made easy");
+                    logger.EventLog(string.Format("Added the product successfully (id: {0}, name: {1}).",
+                        result.result_set.id, product.product_name), "Product", "Controller (AddProduct)");
                     return Ok(result);
 
                 case false:
+                    logger.EventLog("Returned 500 response from the server", "Product", "Controller (AddProduct)");
                     return StatusCode(500, result);
             }
         }
@@ -49,9 +52,11 @@ namespace WebAPIApp.Controllers
             switch (result.success)
             {
                 case true:
+                    logger.EventLog(string.Format("Got all products."), "Product", "Controller (GetAllProducts)");
                     return Ok(result);
 
                 case false:
+                    logger.EventLog("Returned 500 response from the server", "Product", "Controller (GetAllProducts)");
                     return StatusCode(500, result);
             }
         }
@@ -64,9 +69,12 @@ namespace WebAPIApp.Controllers
             switch (result.success)
             {
                 case true:
+                    logger.EventLog(string.Format("Updated product (id: {0}, name: {1}).",
+                        result.result_set.id, product.product_name), "Product", "Controller (UpdateProduct)");
                     return Ok(result);
 
                 case false:
+                    logger.EventLog("Returned 500 response from the server", "Product", "Controller (UpdateProduct)");
                     return StatusCode(500, result);
             }
         }
@@ -79,9 +87,12 @@ namespace WebAPIApp.Controllers
             switch (result.success)
             {
                 case true:
+                    logger.EventLog(string.Format("Deleted product (id: {0}).",
+                        product_id), "Product", "Controller (DeleteProduct)");
                     return Ok(result);
 
                 case false:
+                    logger.EventLog("Returned 500 response from the server", "Product", "Controller (DeleteProduct)");
                     return StatusCode(500, result);
             }
         }
@@ -94,9 +105,12 @@ namespace WebAPIApp.Controllers
             switch (result.success)
             {
                 case true:
+                    logger.EventLog(string.Format("Got product by id (id: {0}, name: {1}).",
+                        product_id, result.result_set.product_name), "Product", "Controller (GetProductById)");
                     return Ok(result);
 
                 case false:
+                    logger.EventLog("Returned 500 response from the server", "Product", "Controller (GetProductById)");
                     return StatusCode(500, result);
             }
         }
@@ -112,6 +126,7 @@ namespace WebAPIApp.Controllers
                     return StatusCode(500, result);
 
                 default:
+                    logger.EventLog("Returned 500 response from the server", "Product", "Controller (GetAllBrands)");
                     return Ok(result);
             }
         }
@@ -127,6 +142,7 @@ namespace WebAPIApp.Controllers
                     return StatusCode(500, result);
 
                 default:
+                    logger.EventLog("Returned 500 response from the server", "Product", "Controller (GetAllTypes)");
                     return Ok(result);
             }
         }

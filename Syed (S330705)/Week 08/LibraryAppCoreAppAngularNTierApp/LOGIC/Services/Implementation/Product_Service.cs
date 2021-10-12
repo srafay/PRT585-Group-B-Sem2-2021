@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Exceptionless;
-
+using static LOGIC.Services.Interfaces.ILogger_Service;
 
 namespace LOGIC.Services.Implementation
 {
@@ -23,6 +23,8 @@ namespace LOGIC.Services.Implementation
     {
         //Reference to our crud functions
         private IProduct_Operations _product_operations = new Product_Operations();
+        //Reference to our logger
+        private readonly ILogger_Service logger = new Logger_Service();
 
         /// <summary>
         /// Adds a new product to the database
@@ -61,6 +63,8 @@ namespace LOGIC.Services.Implementation
                 result.internalMessage = "LOGIC.Services.Implementation.Product_Service: AddProduct() method executed successfully.";
                 result.result_set = productAdded;
                 result.success = true;
+                logger.Log(LogLevel.info, result.internalMessage);
+
             }
             catch (Exception exception)
             {
@@ -87,6 +91,7 @@ namespace LOGIC.Services.Implementation
                 result.internalMessage = "LOGIC.Services.Implementation.Product_Service: DeleteProduct() method executed successfully.";
                 result.result_set = productDeleted;
                 result.success = true;
+                logger.Log(LogLevel.info, result.internalMessage);
             }
             catch (Exception exception)
             {
@@ -130,6 +135,7 @@ namespace LOGIC.Services.Implementation
                 result.userMessage = string.Format("All Products obtained successfully");
                 result.internalMessage = "LOGIC.Services.Implementation.Product_Service: GetAllProducts() method executed successfully.";
                 result.success = true;
+                logger.Log(LogLevel.info, result.internalMessage);
             }
             catch (Exception exception)
             {
@@ -177,6 +183,7 @@ namespace LOGIC.Services.Implementation
                 }
                 result.internalMessage = "LOGIC.Services.Implementation.Product_Service: GetProductById() method executed successfully.";
                 result.success = true;
+                logger.Log(LogLevel.info, result.internalMessage);
             }
             catch (Exception exception)
             {
@@ -231,6 +238,7 @@ namespace LOGIC.Services.Implementation
                 result.internalMessage = "LOGIC.Services.Implementation.Product_Service: UpdateProduct() method executed successfully.";
                 result.result_set = productUpdated;
                 result.success = true;
+                logger.Log(LogLevel.info, result.internalMessage);
             }
             catch (Exception exception)
             {
@@ -271,6 +279,7 @@ namespace LOGIC.Services.Implementation
                 result.internalMessage = "LOGIC.Services.Implementation.Product_Service: GetAllBrands() method executed successfully.";
                 result.success = true;
                 result.xyc = "adsadsa";*/
+                logger.Log(LogLevel.info, "LOGIC.Services.Implementation.Product_Service: GetAllBrands() method executed successfully.");
             }
             catch (Exception exception)
             {
@@ -307,6 +316,7 @@ namespace LOGIC.Services.Implementation
                 /*result.userMessage = string.Format("All Product Types obtained successfully");
                 result.internalMessage = "LOGIC.Services.Implementation.Product_Service: GetAllTypes() method executed successfully.";
                 result.success = true;*/
+                logger.Log(LogLevel.info, "LOGIC.Services.Implementation.Product_Service: GetAllTypes() method executed successfully.");
             }
             catch (Exception exception)
             {

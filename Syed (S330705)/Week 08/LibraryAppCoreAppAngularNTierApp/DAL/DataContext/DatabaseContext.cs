@@ -47,6 +47,7 @@ namespace DAL.DataContext
         public DbSet<Product> Products { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Entities.Type> Types { get; set; }
+        public DbSet<Logger> Loggers { get; set; }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
