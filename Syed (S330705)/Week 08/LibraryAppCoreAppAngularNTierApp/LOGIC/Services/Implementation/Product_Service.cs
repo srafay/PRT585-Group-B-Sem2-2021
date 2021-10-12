@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Exceptionless;
 using static LOGIC.Services.Interfaces.ILogger_Service;
+using System.Runtime.CompilerServices;
 
 namespace LOGIC.Services.Implementation
 {
@@ -25,6 +26,14 @@ namespace LOGIC.Services.Implementation
         private IProduct_Operations _product_operations = new Product_Operations();
         //Reference to our logger
         private readonly ILogger_Service logger = new Logger_Service();
+
+        private static string GetFileName(
+                        [CallerFilePath] string file = "",
+                        [CallerMemberName] string member = "",
+                        [CallerLineNumber] int line = 0)
+        {
+            return string.Format("{0}_{1}({2})", System.IO.Path.GetFileName(file), member, line);
+        }
 
         /// <summary>
         /// Adds a new product to the database
@@ -63,7 +72,7 @@ namespace LOGIC.Services.Implementation
                 result.internalMessage = "LOGIC.Services.Implementation.Product_Service: AddProduct() method executed successfully.";
                 result.result_set = productAdded;
                 result.success = true;
-                logger.Log(LogLevel.info, result.internalMessage);
+                logger.EventLog(result.internalMessage, "Service", GetFileName());
 
             }
             catch (Exception exception)
@@ -73,7 +82,8 @@ namespace LOGIC.Services.Implementation
                 result.userMessage = "We failed to register your information for the Product product supplied. Please try again.";
                 result.internalMessage = string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: AddProduct(): {0}", exception.Message); ;
                 //Success by default is set to false & its always the last value we set in the try block, so we should never need to set it in the catch block.
-                exception.ToExceptionless().Submit();
+                logger.Log(LogLevel.error, result.internalMessage);
+
             }
             return result;
         }
@@ -91,7 +101,7 @@ namespace LOGIC.Services.Implementation
                 result.internalMessage = "LOGIC.Services.Implementation.Product_Service: DeleteProduct() method executed successfully.";
                 result.result_set = productDeleted;
                 result.success = true;
-                logger.Log(LogLevel.info, result.internalMessage);
+                logger.EventLog(result.internalMessage, "Service", GetFileName());
             }
             catch (Exception exception)
             {
@@ -100,7 +110,7 @@ namespace LOGIC.Services.Implementation
                 result.userMessage = "We failed to Delete your information for the Product product supplied. Please try again.";
                 result.internalMessage = string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: DeleteProduct(): {0}", exception.Message); ;
                 //Success by default is set to false & its always the last value we set in the try block, so we should never need to set it in the catch block.
-                exception.ToExceptionless().Submit();
+                logger.Log(LogLevel.error, result.internalMessage);
             }
             return result;
         }
@@ -135,7 +145,7 @@ namespace LOGIC.Services.Implementation
                 result.userMessage = string.Format("All Products obtained successfully");
                 result.internalMessage = "LOGIC.Services.Implementation.Product_Service: GetAllProducts() method executed successfully.";
                 result.success = true;
-                logger.Log(LogLevel.info, result.internalMessage);
+                logger.EventLog(result.internalMessage, "Service", GetFileName());
             }
             catch (Exception exception)
             {
@@ -144,7 +154,7 @@ namespace LOGIC.Services.Implementation
                 result.userMessage = "We failed fetch all the required Products from the database.";
                 result.internalMessage = string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: GetAllProducts(): {0}", exception.Message); ;
                 //Success by default is set to false & its always the last value we set in the try block, so we should never need to set it in the catch block.
-                exception.ToExceptionless().Submit();
+                logger.Log(LogLevel.error, result.internalMessage);
             }
             return result;
         }
@@ -183,7 +193,7 @@ namespace LOGIC.Services.Implementation
                 }
                 result.internalMessage = "LOGIC.Services.Implementation.Product_Service: GetProductById() method executed successfully.";
                 result.success = true;
-                logger.Log(LogLevel.info, result.internalMessage);
+                logger.EventLog(result.internalMessage, "Service", GetFileName());
             }
             catch (Exception exception)
             {
@@ -192,7 +202,7 @@ namespace LOGIC.Services.Implementation
                 result.userMessage = "We failed fetch Get ByID the required Product from the database.";
                 result.internalMessage = string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: Get ByID(): {0}", exception.Message); ;
                 //Success by default is set to false & its always the last value we set in the try block, so we should never need to set it in the catch block.
-                exception.ToExceptionless().Submit();
+                logger.Log(LogLevel.error, result.internalMessage);
             }
             return result;
         }
@@ -238,7 +248,7 @@ namespace LOGIC.Services.Implementation
                 result.internalMessage = "LOGIC.Services.Implementation.Product_Service: UpdateProduct() method executed successfully.";
                 result.result_set = productUpdated;
                 result.success = true;
-                logger.Log(LogLevel.info, result.internalMessage);
+                logger.EventLog(result.internalMessage, "Service", GetFileName());
             }
             catch (Exception exception)
             {
@@ -247,7 +257,7 @@ namespace LOGIC.Services.Implementation
                 result.userMessage = "We failed to update your information for the Product supplied. Please try again.";
                 result.internalMessage = string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: UpdateProduct(): {0}", exception.Message); ;
                 //Success by default is set to false & its always the last value we set in the try block, so we should never need to set it in the catch block.
-                exception.ToExceptionless().Submit();
+                logger.Log(LogLevel.error, result.internalMessage);
             }
             return result;
         }
@@ -288,7 +298,7 @@ namespace LOGIC.Services.Implementation
                 result.userMessage = "We failed fetch all the required Product Brands from the database.";
                 result.internalMessage = string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: GetAllBrands(): {0}", exception.Message); ;*/
                 //Success by default is set to false & its always the last value we set in the try block, so we should never need to set it in the catch block.
-                exception.ToExceptionless().Submit();
+                logger.Log(LogLevel.error, string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: GetAllTypes(): {0}", exception.Message));
             }
             return unique_result;
         }
@@ -325,7 +335,7 @@ namespace LOGIC.Services.Implementation
                 result.userMessage = "We failed fetch all the required Product Types from the database.";
                 result.internalMessage = string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: GetAllTypes(): {0}", exception.Message); ;*/
                 //Success by default is set to false & its always the last value we set in the try block, so we should never need to set it in the catch block.
-                exception.ToExceptionless().Submit();
+                logger.Log(LogLevel.error, string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: GetAllTypes(): {0}", exception.Message));
             }
             return result;
         }
