@@ -1,0 +1,20 @@
+<table class="table" >
+    <tr ngclass="btn-primary">
+      <th class="tbl2">ID</th>
+      <th class="tbl2">Name</th>
+      <th class="tbl2">Desc</th>
+      <th class="tbl2">Price</th>
+      <th class="tbl2">Url</th>
+      <th class="tbl2">Type</th>
+      <th class="tbl2">Brand</th>
+    </tr>
+    <tr *ngFor="let employee of allEmployees">
+      <td class="tbl2">{{employee.id}}</td>
+      <td class="tbl2">{{employee.product_name}}</td>
+      <td class="tbl2">{{employee.product_description}}</td>
+      <td class="tbl2">{{employee.product_price}}</td>
+      <td class="tbl2">{{employee.product_pictureurl}}</td>
+      <td class="tbl2">{{employee.product_type}}</td>
+      <td class="tbl2">{{employee.product_brand}}</td>
+    </tr>
+  </table>
