@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210920105510_ProductsEntity")]
-    partial class ProductsEntity
+    [Migration("20211012103455_Log4netMig")]
+    partial class Log4netMig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -111,6 +111,21 @@ namespace DAL.Migrations
                     b.ToTable("ApplicationStatuses");
                 });
 
+            modelBuilder.Entity("DAL.Entities.Brand", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Brands");
+                });
+
             modelBuilder.Entity("DAL.Entities.Grade", b =>
                 {
                     b.Property<long>("GradeID")
@@ -138,6 +153,24 @@ namespace DAL.Migrations
                     b.ToTable("Grades");
                 });
 
+            modelBuilder.Entity("DAL.Entities.MyLogger", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("LoggerInfo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LoggerMsg")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MyLogger");
+                });
+
             modelBuilder.Entity("DAL.Entities.Product", b =>
                 {
                     b.Property<long>("ProductID")
@@ -145,10 +178,22 @@ namespace DAL.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Product_Brand")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Product_Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Product_Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Product_PictureUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("Product_Price")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Product_Type")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ProductID");
@@ -169,6 +214,21 @@ namespace DAL.Migrations
                     b.HasKey("StudentID");
 
                     b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("DAL.Entities.Type", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Types");
                 });
 
             modelBuilder.Entity("DAL.Entities.Application", b =>

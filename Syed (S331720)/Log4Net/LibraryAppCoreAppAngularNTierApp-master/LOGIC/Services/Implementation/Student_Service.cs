@@ -89,11 +89,7 @@ namespace LOGIC.Services.Implementation
         }
 
 
-        /// <summary>
-        /// Adds a new student to the database
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
+  
         public async Task<Generic_ResultSet<Student_ResultSet>> AddStudent(string name)
         {
             Generic_ResultSet<Student_ResultSet> result = new Generic_ResultSet<Student_ResultSet>();
@@ -132,12 +128,7 @@ namespace LOGIC.Services.Implementation
             return result;
         }
 
-        /// <summary>
-        /// Updat an Student students name.
-        /// </summary>
-        /// <param name="student_id"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
+     
         public async Task<Generic_ResultSet<Student_ResultSet>> UpdateStudent(Int64 student_id, string name)
         {
             Generic_ResultSet<Student_ResultSet> result = new Generic_ResultSet<Student_ResultSet>();

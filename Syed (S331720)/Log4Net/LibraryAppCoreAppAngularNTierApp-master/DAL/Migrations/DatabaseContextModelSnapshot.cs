@@ -151,6 +151,24 @@ namespace DAL.Migrations
                     b.ToTable("Grades");
                 });
 
+            modelBuilder.Entity("DAL.Entities.MyLogger", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("LoggerInfo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LoggerMsg")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MyLogger");
+                });
+
             modelBuilder.Entity("DAL.Entities.Product", b =>
                 {
                     b.Property<long>("ProductID")

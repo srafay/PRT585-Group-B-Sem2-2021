@@ -2,29 +2,29 @@
 
 namespace DAL.Migrations
 {
-    public partial class ProductsEntity : Migration
+    public partial class Log4netMig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "MyLogger",
                 columns: table => new
                 {
-                    ProductID = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Product_Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Product_Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    LoggerMsg = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LoggerInfo = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.ProductID);
+                    table.PrimaryKey("PK_MyLogger", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "MyLogger");
         }
     }
 }

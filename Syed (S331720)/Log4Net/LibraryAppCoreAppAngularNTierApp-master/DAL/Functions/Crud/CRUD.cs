@@ -11,7 +11,7 @@ namespace DAL.Functions.Crud
     /// Generic based CRUD methods, Create, Read, Update, Delete methods.
     /// <para>In region: BASIC EXAMPLE WITHOUT - DI : you will find a very basic set of examples</para>
     /// </summary>
-    public class CRUD: ICRUD
+    public class CRUD : ICRUD
     {
         #region CRUD
         /// <summary>

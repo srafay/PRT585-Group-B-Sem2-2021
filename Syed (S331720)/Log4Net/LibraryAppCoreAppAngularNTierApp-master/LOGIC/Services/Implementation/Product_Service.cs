@@ -1,11 +1,13 @@
 ﻿using DAL.Entities;
 using DAL.Functions.Interfaces;
+using DAL.Functions.Crud;
 using DAL.Functions.Specific;
 using LOGIC.Services.Interfaces;
 using LOGIC.Services.Models;
 using LOGIC.Services.Models.Brand;
 using LOGIC.Services.Models.Product;
 using LOGIC.Services.Models.Type;
+using LOGIC.Services.Models.MyLogger;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -20,12 +22,17 @@ namespace LOGIC.Services.Implementation
     /// </summary>
     public class Product_Service : IProduct_Service
     {
+        //var infoS = String.Format("Product {0} added with id {1}",product.product_name,product.id);
+        //var MsgS = String.Format("Log Message : {0}", result.userMessage);
 
-        public Product_Service(ILogger<Product_Service> logger)
+        private IMyLogger_Service _MyLogger_Service;
+        private readonly ILogger<Product_Service> _fileLogger;
+        public Product_Service(IMyLogger_Service MyLogger_Service, ILogger<Product_Service> Filelogger)
         {
-            _logger = logger;
+            _fileLogger = Filelogger;
+            _MyLogger_Service = MyLogger_Service;
         }
-        private readonly ILogger<Product_Service> _logger;
+
         //Reference to our crud functions
         private IProduct_Operations _product_operations = new Product_Operations();
 
@@ -46,7 +53,10 @@ namespace LOGIC.Services.Implementation
                     Product_Brand = brand,
                     Product_Type = type
                 };
+                //var infoS = String.Format("Info : Product's name {0}",Product.Product_Name);
+                //var MsgS = String.Format("Log Message : Product Added Successfully");
 
+               
                 //ADD Product TO DB
                 Product = await _product_operations.Create(Product);
 
@@ -66,14 +76,17 @@ namespace LOGIC.Services.Implementation
                 result.internalMessage = "LOGIC.Services.Implementation.Product_Service: AddProduct() method executed successfully.";
                 result.result_set = productAdded;
                 result.success = true;
+                _fileLogger.LogInformation(result.userMessage);
+                await _MyLogger_Service.AddLog(result.internalMessage,result.userMessage);
             }
             catch (Exception exception)
             {
                 //SET FAILED RESULT VALUES
                 result.exception = exception;
-                result.userMessage = "We failed to register your information for the Product product supplied. Please try again.";
+                result.userMessage = String.Format("We failed to register your information for the Product {0} supplied. Please try again.",name);
                 result.internalMessage = string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: AddProduct(): {0}", exception.Message);
-                _logger.LogError(result.internalMessage);
+                _fileLogger.LogError(result.userMessage);
+                await _MyLogger_Service.AddLog(result.internalMessage, result.userMessage);
 
 
                 //Success by default is set to false & its always the last value we set in the try block, so we should never need to set it in the catch block.
@@ -90,18 +103,22 @@ namespace LOGIC.Services.Implementation
                 var productDeleted = await _product_operations.Delete(id);
 
                 //SET SUCCESSFUL RESULT VALUES
-                result.userMessage = string.Format("The supplied Product product {0} was deleted successfully", id);
+                result.userMessage = string.Format("The supplied Product {0} was deleted successfully", id);
                 result.internalMessage = "LOGIC.Services.Implementation.Product_Service: DeleteProduct() method executed successfully.";
                 result.result_set = productDeleted;
+                _fileLogger.LogInformation(result.userMessage);
+                await _MyLogger_Service.AddLog(result.internalMessage, result.userMessage);
                 result.success = true;
             }
             catch (Exception exception)
             {
                 //SET FAILED RESULT VALUES
                 result.exception = exception;
-                result.userMessage = "We failed to Delete your information for the Product product supplied. Please try again.";
+                result.userMessage = String.Format("We failed to Delete your information for the Product with id {0} supplied. Please try again.",id);
                 result.internalMessage = string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: DeleteProduct(): {0}", exception.Message); ;
                 //Success by default is set to false & its always the last value we set in the try block, so we should never need to set it in the catch block.
+                _fileLogger.LogError(result.userMessage);
+                await _MyLogger_Service.AddLog(result.internalMessage, result.userMessage);
             }
             return result;
         }
@@ -136,6 +153,8 @@ namespace LOGIC.Services.Implementation
                 result.userMessage = string.Format("All Products obtained successfully");
                 result.internalMessage = "LOGIC.Services.Implementation.Product_Service: GetAllProducts() method executed successfully.";
                 result.success = true;
+                _fileLogger.LogInformation(result.userMessage);
+                await _MyLogger_Service.AddLog(result.internalMessage, result.userMessage);
             }
             catch (Exception exception)
             {
@@ -144,6 +163,8 @@ namespace LOGIC.Services.Implementation
                 result.userMessage = "We failed fetch all the required Products from the database.";
                 result.internalMessage = string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: GetAllProducts(): {0}", exception.Message); ;
                 //Success by default is set to false & its always the last value we set in the try block, so we should never need to set it in the catch block.
+                _fileLogger.LogError(result.userMessage);
+                await _MyLogger_Service.AddLog(result.internalMessage, result.userMessage);
             }
             return result;
         }
@@ -173,6 +194,7 @@ namespace LOGIC.Services.Implementation
 
                     //SET SUCCESSFUL RESULT VALUES
                     result.userMessage = string.Format("GetProductById - Product obtained successfully");
+              
                 }
                 /* Code for Handling empty Product END */
                 else
@@ -182,6 +204,8 @@ namespace LOGIC.Services.Implementation
                 }
                 result.internalMessage = "LOGIC.Services.Implementation.Product_Service: GetProductById() method executed successfully.";
                 result.success = true;
+                _fileLogger.LogInformation(result.userMessage);
+                await _MyLogger_Service.AddLog(result.internalMessage, result.userMessage);
             }
             catch (Exception exception)
             {
@@ -190,6 +214,8 @@ namespace LOGIC.Services.Implementation
                 result.userMessage = "We failed fetch Get ByID the required Product from the database.";
                 result.internalMessage = string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: Get ByID(): {0}", exception.Message); ;
                 //Success by default is set to false & its always the last value we set in the try block, so we should never need to set it in the catch block.
+                _fileLogger.LogInformation(result.userMessage);
+                await _MyLogger_Service.AddLog(result.internalMessage, result.userMessage);
             }
             return result;
         }
@@ -235,6 +261,8 @@ namespace LOGIC.Services.Implementation
                 result.internalMessage = "LOGIC.Services.Implementation.Product_Service: UpdateProduct() method executed successfully.";
                 result.result_set = productUpdated;
                 result.success = true;
+                _fileLogger.LogInformation(result.userMessage);
+                await _MyLogger_Service.AddLog(result.internalMessage, result.userMessage);
             }
             catch (Exception exception)
             {
@@ -243,6 +271,8 @@ namespace LOGIC.Services.Implementation
                 result.userMessage = "We failed to update your information for the Product supplied. Please try again.";
                 result.internalMessage = string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: UpdateProduct(): {0}", exception.Message); ;
                 //Success by default is set to false & its always the last value we set in the try block, so we should never need to set it in the catch block.
+                _fileLogger.LogInformation(result.userMessage);
+                await _MyLogger_Service.AddLog(result.internalMessage, result.userMessage);
             }
             return result;
         }
@@ -274,14 +304,19 @@ namespace LOGIC.Services.Implementation
                 result.internalMessage = "LOGIC.Services.Implementation.Product_Service: GetAllBrands() method executed successfully.";
                 result.success = true;
                 result.xyc = "adsadsa";*/
+                _fileLogger.LogInformation("All Product Brands obtained successfully");
+                await _MyLogger_Service.AddLog("LOGIC.Services.Implementation.Product_Service: GetAllBrands() method executed successfully.", "All Product Brands obtained successfully");
             }
-            catch (Exception exception)
+            catch (Exception)
             {
+
                 //SET FAILED RESULT VALUES
                 /*result.exception = exception;
                 result.userMessage = "We failed fetch all the required Product Brands from the database.";
                 result.internalMessage = string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: GetAllBrands(): {0}", exception.Message); ;*/
                 //Success by default is set to false & its always the last value we set in the try block, so we should never need to set it in the catch block.
+                _fileLogger.LogInformation("We failed fetch all the required Product Brands from the database.");
+                await _MyLogger_Service.AddLog("ERROR: LOGIC.Services.Implementation.Product_Service: GetAllBrands()", "We failed fetch all the required Product Brands from the database.");
             }
             return unique_result;
         }
@@ -309,14 +344,19 @@ namespace LOGIC.Services.Implementation
                 /*result.userMessage = string.Format("All Product Types obtained successfully");
                 result.internalMessage = "LOGIC.Services.Implementation.Product_Service: GetAllTypes() method executed successfully.";
                 result.success = true;*/
+                _fileLogger.LogInformation("All Product Types obtained successfully");
+                await _MyLogger_Service.AddLog("LOGIC.Services.Implementation.Product_Service: GetAllTypes() method executed successfully.", "All Product Types obtained successfully");
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 //SET FAILED RESULT VALUES
+
                 /*result.exception = exception;
                 result.userMessage = "We failed fetch all the required Product Types from the database.";
                 result.internalMessage = string.Format("ERROR: LOGIC.Services.Implementation.Product_Service: GetAllTypes(): {0}", exception.Message); ;*/
                 //Success by default is set to false & its always the last value we set in the try block, so we should never need to set it in the catch block.
+                _fileLogger.LogInformation("We failed fetch all the required Product Types from the database.");
+                await _MyLogger_Service.AddLog("ERROR: LOGIC.Services.Implementation.Product_Service: GetAllTypes()", "We failed fetch all the required Product Types from the database.");
             }
             return result;
         }
