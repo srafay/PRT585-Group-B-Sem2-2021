@@ -9,6 +9,7 @@ import { CoreModule } from './core/core.module';
 import { ShopModule } from './shop/shop.module';
 import { AppRoutingModule } from './app-routing.module';
 import { CrudModule } from './crud/crud.module';
+import { IonicModule } from '@ionic/angular';
 
 
 
@@ -25,7 +26,8 @@ import { CrudModule } from './crud/crud.module';
     CoreModule,
     ShopModule,
     AppRoutingModule,
-    CrudModule
+    CrudModule,
+    IonicModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
