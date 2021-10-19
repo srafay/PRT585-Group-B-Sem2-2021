@@ -9,7 +9,7 @@ using WebAPIApp.Models.Brand;
 
 namespace WebAPIApp.Controllers
 {
-    [EnableCors("angular")]
+    [EnableCors("app")]
     [Route("api/[controller]")]
     [ApiController]
     public class BrandController : ControllerBase

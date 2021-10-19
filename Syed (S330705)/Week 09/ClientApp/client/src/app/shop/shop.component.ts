@@ -29,6 +29,13 @@ export class ShopComponent implements OnInit {
     this.getProducts();
     this.getBrands();
     this.getTypes();
+    console.log("HOME CLICKED");
+  }
+
+   objToString (obj: Object) {
+    return Object.entries(obj).reduce((str, [p, val]) => {
+        return `${str}${p}::${val}\n`;
+    }, '');
   }
 
   getProducts() {
@@ -38,7 +45,8 @@ export class ShopComponent implements OnInit {
       // this.shopParams.pageSize = response.pageSize;
       // this.totalCount = response.count;
     }, error => {
-      console.log(error);
+      console.log("Got error getProducts");
+      console.log(JSON.stringify(error));
     })
   }
 
@@ -46,7 +54,8 @@ export class ShopComponent implements OnInit {
     this.shopService.getBrands().subscribe(response => {
       this.brands = [{id: 0, name: 'All'}, ...response];
     }, error => {
-      console.log(error);
+      console.log("Got error getBrands");
+      console.log(String(error));
     })
   }
 
@@ -54,7 +63,9 @@ export class ShopComponent implements OnInit {
     this.shopService.getTypes().subscribe(response => {
       this.types = [{id: 0, name: 'All'}, ...response];
     }, error => {
-      console.log(error);
+      console.log("Got error getTypes");
+      console.log(this.objToString(error));
+      console.log()
     })
   }
 

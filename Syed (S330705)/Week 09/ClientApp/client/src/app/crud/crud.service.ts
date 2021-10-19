@@ -10,7 +10,8 @@ import { IProduct } from '../shared/models/product';
 })
 export class CrudService {
   response?: any;
-  url = 'https://localhost:44341/api/Product';  
+  url = 'https://localhost:44341/api/Product';
+  // url = 'https://10.0.2.2:44341/api/Product';
   constructor(private http: HttpClient) { }  
   getAllEmployee() {
     // console.log("getAllEmployee");

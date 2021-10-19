@@ -69,7 +69,7 @@ namespace WebAPIApp
             }
             services.AddCors(options =>
             {
-                options.AddPolicy("angular",
+                options.AddPolicy("app",
                     builder =>
                     {
                         builder.WithOrigins(corsUrls)

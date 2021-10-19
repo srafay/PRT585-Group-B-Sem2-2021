@@ -10,7 +10,7 @@ using WEB_API.Models.Student;
 
 namespace WEB_API.Controllers
 {
-    [EnableCors("angular")]
+    //[EnableCors("*")]
     [Route("api/[controller]")]
     [ApiController]
     public class StudentController : ControllerBase

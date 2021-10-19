@@ -13,7 +13,7 @@ using static LOGIC.Services.Interfaces.ILogger_Service;
 
 namespace WebAPIApp.Controllers
 {
-    [EnableCors("angular")]
+    [EnableCors("app")]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase

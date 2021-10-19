@@ -23,7 +23,7 @@ This is week 09 of the Software Engineering Practice. For this week, following t
 **Install Android SDK:**
 - Goto https://developer.android.com/studio and download Android Studio.
 - After you install and open Android Studio, install the Android SDK as follows:
-		+ Click Tools > SDK Manager.
-		+ In the SDK Platforms tab, select Android 11 (latest).
-		+ In the SDK Tools tab, select Android SDK Build-Tools 30 (or latest).
-		+ Click OK to begin install.
+	+ Click Tools > SDK Manager.
+	+ In the SDK Platforms tab, select Android 11 (latest).
+	+ In the SDK Tools tab, select Android SDK Build-Tools 30 (or latest).
+	+ Click OK to begin install.

@@ -9,7 +9,7 @@ using WebAPIApp.Models.Type;
 
 namespace WebAPIApp.Controllers
 {
-    [EnableCors("angular")]
+    [EnableCors("app")]
     [Route("api/[controller]")]
     [ApiController]
     public class TypeController : ControllerBase
