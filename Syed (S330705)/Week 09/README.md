@@ -27,3 +27,5 @@ This is week 09 of the Software Engineering Practice. For this week, following t
 	+ In the SDK Platforms tab, select Android 11 (latest).
 	+ In the SDK Tools tab, select Android SDK Build-Tools 30 (or latest).
 	+ Click OK to begin install.
+- Install Java JDK 1.8.x
+- Fix gradle version issues and install new and add to path if needed.
